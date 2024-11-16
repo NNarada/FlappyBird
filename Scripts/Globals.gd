@@ -8,6 +8,7 @@ var current_vertical_offset: int
 
 var ground_spacing_ratio: float
 var spawn_ground_spacing: int
+var paused: bool = false
 
 func _ready():
 	get_tree().get_root().connect("size_changed", Callable(self, "window_resized"))

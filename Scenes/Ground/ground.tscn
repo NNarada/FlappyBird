@@ -11,6 +11,8 @@ script = ExtResource("1_a7tc3")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -36)
+collision_layer = 4
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 10)
@@ -18,3 +20,6 @@ shape = SubResource("RectangleShape2D_8d2qr")
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
 texture = ExtResource("1_wk3wt")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

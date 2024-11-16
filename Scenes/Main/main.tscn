@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://by7q3alvfedei"]
+[gd_scene load_steps=7 format=3 uid="uid://by7q3alvfedei"]
 
 [ext_resource type="Script" path="res://Scenes/Main/main.gd" id="1_m00r3"]
 [ext_resource type="PackedScene" uid="uid://cxj00ell8gj47" path="res://Scenes/Pipe/pipe.tscn" id="2_y13hr"]
@@ -7,6 +7,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mt100"]
 size = Vector2(240, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gpo5v"]
+size = Vector2(40, 736)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_m00r3")
@@ -26,18 +29,18 @@ position = Vector2(315, 290)
 
 [node name="Ground" type="Node2D" parent="."]
 
-[node name="GroundSpawnPoint" type="Marker2D" parent="Ground"]
-position = Vector2(1250, 648)
-
-[node name="RigidBody2D" type="RigidBody2D" parent="Ground/GroundSpawnPoint"]
-position = Vector2(-930, -114)
+[node name="RigidBody2D" type="RigidBody2D" parent="Ground"]
+position = Vector2(320, 534)
 mass = 100000.0
 gravity_scale = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/GroundSpawnPoint/RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/RigidBody2D"]
 position = Vector2(12, 87)
 shape = SubResource("RectangleShape2D_mt100")
 debug_color = Color(0.913669, 0.203472, 0.529195, 0.42)
+
+[node name="GroundSpawnPoint" type="Marker2D" parent="Ground"]
+position = Vector2(1250, 648)
 
 [node name="Ground" parent="Ground/GroundSpawnPoint" instance=ExtResource("4_xqwox")]
 
@@ -70,6 +73,15 @@ position = Vector2(-1152, 0)
 
 [node name="Ground11" parent="Ground/GroundSpawnPoint" instance=ExtResource("4_xqwox")]
 position = Vector2(-1279, 0)
+
+[node name="DestroyOffScreenObjects" type="Area2D" parent="."]
+position = Vector2(-248, 300)
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyOffScreenObjects"]
+position = Vector2(10, 0)
+shape = SubResource("RectangleShape2D_gpo5v")
 
 [connection signal="spawn_next_pipe" from="Pipes/SpawnPoint/Pipe" to="." method="_on_pipe_spawn_next_pipe"]
 [connection signal="spawn_next_ground" from="Ground/GroundSpawnPoint/Ground" to="." method="_on_ground_spawn_next_ground"]

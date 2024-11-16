@@ -26,6 +26,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if Globals.paused:
+		return 
 	position.x -= speed * delta
 	if !spawn_signal_emitted and global_position.x < Globals.spawn_horizontal_spacing:
 		spawn_next_pipe.emit()
@@ -37,3 +39,24 @@ func window_resized():
 
 func make_top_pipe():
 	is_bottom_pipe = false
+
+
+func _on_pipe_end_area_entered(area):
+	if area.name == "DestroyOffScreenObjects":
+		queue_free()
+
+
+func _on_pipe_body_area_entered(area):
+	if area.name == "DestroyOffScreenObjects":
+		queue_free()
+
+
+
+func _on_pipe_body_body_entered(body):
+	if body.name == "Player":
+		collision.emit()
+
+
+func _on_pipe_end_body_entered(body):
+	if body.name == "Player":
+		collision.emit()

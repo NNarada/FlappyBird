@@ -16,6 +16,8 @@ func _physics_process(_delta):
 		rotation_degrees = -30
 	
 func _input(event):
+	if Globals.paused:
+		return 
 	if event.is_action_pressed("Flap"):
 		angular_velocity = -8
 		linear_velocity.y = -200
