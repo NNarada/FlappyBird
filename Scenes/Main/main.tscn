@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://by7q3alvfedei"]
+
+[ext_resource type="Script" path="res://Scenes/Main/main.gd" id="1_m00r3"]
+[ext_resource type="PackedScene" uid="uid://cxj00ell8gj47" path="res://Scenes/Pipe/pipe.tscn" id="2_y13hr"]
+[ext_resource type="PackedScene" uid="uid://bu4x3c18rv1y2" path="res://Scenes/player/player.tscn" id="3_p4oc8"]
+[ext_resource type="PackedScene" uid="uid://ckk0y26syt3xu" path="res://Scenes/Ground/ground.tscn" id="4_xqwox"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mt100"]
+size = Vector2(240, 39)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_m00r3")
+
+[node name="Pipes" type="Node2D" parent="."]
+
+[node name="SpawnPoint" type="Marker2D" parent="Pipes"]
+position = Vector2(1212, 340)
+
+[node name="Pipe" parent="Pipes/SpawnPoint" instance=ExtResource("2_y13hr")]
+
+[node name="Pipe2" parent="Pipes/SpawnPoint" instance=ExtResource("2_y13hr")]
+is_bottom_pipe = false
+
+[node name="Player" parent="." instance=ExtResource("3_p4oc8")]
+position = Vector2(315, 290)
+
+[node name="Ground" type="Node2D" parent="."]
+
+[node name="GroundSpawnPoint" type="Marker2D" parent="Ground"]
+position = Vector2(1250, 648)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Ground/GroundSpawnPoint"]
+position = Vector2(-930, -114)
+mass = 100000.0
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/GroundSpawnPoint/RigidBody2D"]
+position = Vector2(12, 87)
+shape = SubResource("RectangleShape2D_mt100")
+debug_color = Color(0.913669, 0.203472, 0.529195, 0.42)
+
+[node name="Ground" parent="Ground/GroundSpawnPoint" instance=ExtResource("4_xqwox")]
+
+[node name="Ground2" parent="Ground/GroundSpawnPoint" instance=ExtResource("4_xqwox")]
+position = Vector2(-128, 0)
+
+[node name="Ground3" parent="Ground/GroundSpawnPoint" instance=ExtResource("4_xqwox")]
+position = Vector2(-256, 0)
+
+[node name="Ground4" parent="Ground/GroundSpawnPoint" instance=ExtResource("4_xqwox")]
+position = Vector2(-384, 0)
+
+[node name="Ground5" parent="Ground/GroundSpawnPoint" instance=ExtResource("4_xqwox")]
+position = Vector2(-512, 0)
+
+[node name="Ground6" parent="Ground/GroundSpawnPoint" instance=ExtResource("4_xqwox")]
+position = Vector2(-640, 0)
+
+[node name="Ground7" parent="Ground/GroundSpawnPoint" instance=ExtResource("4_xqwox")]
+position = Vector2(-768, 0)
+
+[node name="Ground8" parent="Ground/GroundSpawnPoint" instance=ExtResource("4_xqwox")]
+position = Vector2(-896, 0)
+
+[node name="Ground9" parent="Ground/GroundSpawnPoint" instance=ExtResource("4_xqwox")]
+position = Vector2(-1024, 0)
+
+[node name="Ground10" parent="Ground/GroundSpawnPoint" instance=ExtResource("4_xqwox")]
+position = Vector2(-1152, 0)
+
+[node name="Ground11" parent="Ground/GroundSpawnPoint" instance=ExtResource("4_xqwox")]
+position = Vector2(-1279, 0)
+
+[connection signal="spawn_next_pipe" from="Pipes/SpawnPoint/Pipe" to="." method="_on_pipe_spawn_next_pipe"]
+[connection signal="spawn_next_ground" from="Ground/GroundSpawnPoint/Ground" to="." method="_on_ground_spawn_next_ground"]

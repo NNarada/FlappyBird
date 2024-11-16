@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://by7q3alvfedei"]
+
+[ext_resource type="Script" path="res://Scenes/Main/main.gd" id="1_m00r3"]
+[ext_resource type="PackedScene" uid="uid://cxj00ell8gj47" path="res://Scenes/Pipe/pipe.tscn" id="2_y13hr"]
+[ext_resource type="PackedScene" uid="uid://bu4x3c18rv1y2" path="res://Scenes/player/player.tscn" id="3_p4oc8"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_m00r3")
+
+[node name="Pipes" type="Node2D" parent="."]
+
+[node name="SpawnPoint" type="Marker2D" parent="Pipes"]
+position = Vector2(1212, 340)
+
+[node name="Pipe" parent="Pipes/SpawnPoint" instance=ExtResource("2_y13hr")]
+
+[node name="Pipe2" parent="Pipes/SpawnPoint" instance=ExtResource("2_y13hr")]
+is_bottom_pipe = false
+
+[node name="Player" parent="." instance=ExtResource("3_p4oc8")]
+position = Vector2(315, 290)
+
+[connection signal="spawn_next_pipe" from="Pipes/SpawnPoint/Pipe" to="." method="_on_pipe_spawn_next_pipe"]

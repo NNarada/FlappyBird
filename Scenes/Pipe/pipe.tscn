@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxj00ell8gj47"]
+
+[ext_resource type="Texture2D" uid="uid://tsvsje8dqe0l" path="res://Graphics/PipeEnd.png" id="1_b1xov"]
+[ext_resource type="Script" path="res://Scenes/Pipe/pipe.gd" id="1_vnsw7"]
+[ext_resource type="Texture2D" uid="uid://n7ryl1kgbdrm" path="res://Graphics/Pipe.png" id="2_jm6dj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h35ri"]
+size = Vector2(93, 128)
+
+[node name="Pipe" type="Node2D"]
+script = ExtResource("1_vnsw7")
+
+[node name="PipeEnd" type="Area2D" parent="."]
+position = Vector2(0, -128)
+
+[node name="Sprite2D" type="Sprite2D" parent="PipeEnd"]
+position = Vector2(0, -64)
+texture = ExtResource("1_b1xov")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PipeEnd"]
+position = Vector2(0, -64)
+polygon = PackedVector2Array(-56, -62, -56, -18, -47, -18, -47, 67, 47, 67, 46, -16, 56, -16, 56, -63)
+
+[node name="PipeBody" type="Area2D" parent="."]
+position = Vector2(0, -128)
+
+[node name="Sprite2D" type="Sprite2D" parent="PipeBody"]
+position = Vector2(0, 64)
+texture = ExtResource("2_jm6dj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PipeBody"]
+position = Vector2(0, 64)
+shape = SubResource("RectangleShape2D_h35ri")
