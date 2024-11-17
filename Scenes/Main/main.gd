@@ -8,6 +8,7 @@ var off_screen_y_distance_ground: int
 var random_point_near_screen_center: int
 
 @onready var ground_spawn_point = $Ground/GroundSpawnPoint
+@onready var background: Sprite2D = $Background
 
 func _ready():
 	get_tree().get_root().connect("size_changed", Callable(self, "window_resized"))
@@ -16,6 +17,10 @@ func _ready():
 	Globals.current_vertical_offset = random_point_near_screen_center
 	off_screen_x_distance_ground = ground_spawn_point.position.x - Globals.screen_resolution.x
 	off_screen_y_distance_ground = ground_spawn_point.position.y - Globals.screen_resolution.y 
+	
+	background.scale.x = Globals.screen_resolution.x / 668
+	background.scale.y = (Globals.screen_resolution.y - 36) /394
+	background.position = Globals.screen_center
 	
 	for ground in $Ground/GroundSpawnPoint.get_children():
 		ground.connect("collision", Callable(self, "_on_player_collision"))
@@ -43,6 +48,10 @@ func window_resized():
 	#when the window changes size, reposition the off screen object destroyer and resized it
 	$DestroyOffScreenObjects.position.y = get_viewport().size.y / 2
 	$DestroyOffScreenObjects/CollisionShape2D.shape.size.y = get_viewport().size.y
+	
+	background.scale.x = Globals.screen_resolution.x / 668
+	background.scale.y = (Globals.screen_resolution.y - 36) /394
+	background.position = Globals.screen_center
 	
 	#$Line2D.global_position.y = Globals.screen_center.y
 

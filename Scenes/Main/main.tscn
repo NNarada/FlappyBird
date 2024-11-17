@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://by7q3alvfedei"]
+[gd_scene load_steps=8 format=3 uid="uid://by7q3alvfedei"]
 
 [ext_resource type="Script" path="res://Scenes/Main/main.gd" id="1_m00r3"]
+[ext_resource type="Texture2D" uid="uid://b0c1sykj5n7e4" path="res://Graphics/Background.PNG" id="2_nkccf"]
 [ext_resource type="PackedScene" uid="uid://cxj00ell8gj47" path="res://Scenes/Pipe/pipe.tscn" id="2_y13hr"]
 [ext_resource type="PackedScene" uid="uid://bu4x3c18rv1y2" path="res://Scenes/player/player.tscn" id="3_p4oc8"]
 [ext_resource type="PackedScene" uid="uid://ckk0y26syt3xu" path="res://Scenes/Ground/ground.tscn" id="4_xqwox"]
@@ -13,6 +14,12 @@ size = Vector2(40, 736)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_m00r3")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(580, 298)
+scale = Vector2(1.70359, 1.55838)
+texture = ExtResource("2_nkccf")
+region_rect = Rect2(0, 0, 668, 394)
 
 [node name="Pipes" type="Node2D" parent="."]
 
